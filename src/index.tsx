@@ -4,6 +4,7 @@ import { Provider } from 'react-redux'
 import { HashRouter } from 'react-router-dom'
 import { configureStore } from 'redux-starter-kit'
 import { AppComp } from './comp/AppComp'
+import './index.scss'
 import { reduceState } from './reducer/reduceState'
 import * as serviceWorker from './serviceWorker'
 
