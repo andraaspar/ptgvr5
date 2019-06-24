@@ -117,7 +117,7 @@ export const AddLocationComp = withRouter(
 								{Object.keys(selectedLocations).length > 0 && (
 									<div className='autocomplete__buttons end-layout'>
 										<button
-											className='button'
+											className='button button--all-caps'
 											onClick={e => {
 												dispatch(
 													thunkCompleteAndAddLocations(
