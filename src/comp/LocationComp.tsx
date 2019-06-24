@@ -7,10 +7,9 @@ export interface LocationCompProps {
 
 export function LocationComp({ location }: LocationCompProps) {
 	return (
-		<div>
-			<strong>{location.cityName}</strong>
-			<br />
-			<small>{location.countryName}</small>
+		<div className='location'>
+			<div className='location__capital'>{location.cityName}</div>
+			<div className='location__country'>{location.countryName}</div>
 		</div>
 	)
 }

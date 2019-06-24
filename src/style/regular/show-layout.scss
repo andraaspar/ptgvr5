@@ -1,0 +1,16 @@
+.show-layout {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	align-items: center;
+	justify-content: center;
+}
+
+.show-layout__inner {
+	display: flex;
+	flex-direction: column;
+	width: 300px;
+	max-width: 100%;
+}

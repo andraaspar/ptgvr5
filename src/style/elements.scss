@@ -1,27 +1,38 @@
+* {
+	box-sizing: border-box;
+}
+
 html {
 	font-family: 'Roboto', sans-serif;
 	background-color: $BLUE_3;
 	color: $TEAL_1;
 }
 
+html,
+body,
+#root {
+	overflow: auto;
+	height: 100%;
+	position: relative;
+}
+
 svg {
 	fill: currentColor;
 }
 
-a {
-	color: $TEAL_1;
-}
-
-button {
-	color: $TEAL_1;
+input {
+	padding: 5px;
 	border: 0;
+	border-bottom: 1px solid $BLUE_1;
 	background: transparent;
+	color: $TEAL_1;
 
-	&:hover {
-		background: rgba($BLUE_2, 0.6);
+	&::placeholder {
+		color: rgba($TEAL_1, 0.6);
 	}
 
-	&:active {
-		background: rgba($BLUE_2, 1);
+	&:focus {
+		outline: none;
+		background: rgba($BLUE_2, 0.6);
 	}
 }

@@ -34,78 +34,103 @@ export const AddLocationComp = withRouter(
 			[k: string]: ILocationWithoutTimeZone
 		}>({})
 		return (
-			<div>
-				<Link to={makeRouteSelectLocation()}>{`<`}</Link>
-				<div>
-					<input
-						value={query}
-						onInput={e => {
-							const value = (e.target as HTMLInputElement).value
-							setQuery(value)
-							setLoadedLocations([])
-							setSelectedLocations({})
-							loadLocationsByQueryDebounced(
-								value,
-								locations => {
-									const locationsNotSelected: ILocationWithoutTimeZone[] = []
-									for (const location of locations) {
-										if (!locationIdsSet.has(location.id)) {
-											const newLength = locationsNotSelected.push(
-												location,
+			<div className='page'>
+				<div className='page__head'>
+					<Link
+						to={makeRouteSelectLocation()}
+						className='button'
+					>{`<`}</Link>
+				</div>
+				<div className='page__body'>
+					<div className='add-layout'>
+						<div className='autocomplete'>
+							<input
+								className='autocomplete__input'
+								value={query}
+								placeholder='Type here'
+								onChange={e => {
+									const value = (e.target as HTMLInputElement)
+										.value
+									setQuery(value)
+									setLoadedLocations([])
+									setSelectedLocations({})
+									loadLocationsByQueryDebounced(
+										value,
+										locations => {
+											const locationsNotSelected: ILocationWithoutTimeZone[] = []
+											for (const location of locations) {
+												if (
+													!locationIdsSet.has(
+														location.id,
+													)
+												) {
+													const newLength = locationsNotSelected.push(
+														location,
+													)
+													if (newLength === 8) break
+												}
+											}
+											setLoadedLocations(
+												locationsNotSelected,
 											)
-											if (newLength === 8) break
-										}
-									}
-									setLoadedLocations(locationsNotSelected)
-								},
-								e => console.error(e),
-							)
-						}}
-					/>
-				</div>
-				<div>
-					{loadedLocations.map((location, index) => (
-						<button
-							key={index}
-							className={[
-								'autocomplete__list__button',
-								selectedLocations[location.id] &&
-									'autocomplete__list__button--selected',
-							]
-								.filter(Boolean)
-								.join(' ')}
-							onClick={e => {
-								setSelectedLocations(
-									selectedLocations[location.id]
-										? {}
-										: {
-												[location.id]: location,
-										  },
-								)
-							}}
-						>
-							<LocationComp location={location} />
-						</button>
-					))}
-				</div>
-				{Object.keys(selectedLocations).length > 0 && (
-					<div>
-						<button
-							onClick={e => {
-								dispatch(
-									thunkCompleteAndAddLocations(
-										Object.keys(selectedLocations).map(
-											key => selectedLocations[key],
-										),
-										history,
-									),
-								)
-							}}
-						>
-							Save
-						</button>
+										},
+										e => console.error(e),
+									)
+								}}
+							/>
+							<div className='list autocomplete__list'>
+								{loadedLocations.map((location, index) => (
+									<button
+										key={index}
+										className={[
+											'list__button',
+											selectedLocations[location.id] &&
+												'list__button--selected',
+										]
+											.filter(Boolean)
+											.join(' ')}
+										onClick={e => {
+											setSelectedLocations(
+												selectedLocations[location.id]
+													? {}
+													: {
+															[location.id]: location,
+													  },
+											)
+										}}
+									>
+										<LocationComp location={location} />
+									</button>
+								))}
+
+								{Object.keys(selectedLocations).length > 0 && (
+									<div className='autocomplete__buttons end-layout'>
+										<button
+											className='button'
+											onClick={e => {
+												dispatch(
+													thunkCompleteAndAddLocations(
+														Object.keys(
+															selectedLocations,
+														).map(
+															key =>
+																selectedLocations[
+																	key
+																],
+														),
+														history,
+													),
+												)
+											}}
+										>
+											Save
+										</button>
+									</div>
+								)}
+							</div>
+						</div>
 					</div>
-				)}
+				</div>
 			</div>
 		)
 	}),

@@ -1,15 +1,14 @@
-.autocomplete__list__button {
-	padding: 5px;
+.autocomplete {
+	display: flex;
+	flex-direction: column;
+	width: 300px;
+	max-width: 100%;
 }
 
-.autocomplete__list__button--selected {
-	background-color: rgba($BLUE_1, 0.6);
+.autocomplete__input {
+	margin-bottom: 10px;
+}
 
-	&:hover {
-		background-color: rgba($BLUE_1, 0.8);
-	}
-
-	&:active {
-		background-color: rgba($BLUE_1, 1);
-	}
+.autocomplete__buttons {
+	margin-top: 10px;
 }

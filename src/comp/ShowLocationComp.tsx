@@ -11,6 +11,8 @@ import { getMinuteTimestamp } from '../function/getMinuteTimestamp'
 import { ILocation } from '../model/ILocation'
 import { IState } from '../model/IState'
 import { IWeather } from '../model/IWeather'
+import { ReactComponent as WiSunriseIconComp } from '../resource/wi-sunrise.svg'
+import { ReactComponent as WiSunsetIconComp } from '../resource/wi-sunset.svg'
 import { makeRouteSelectLocation } from '../routing/RouteSelectLocation'
 import {
 	getLocationIndexFromRouteShowLocation,
@@ -22,6 +24,7 @@ import {
 	selectWeather,
 } from '../selector/selectors'
 import { DispatchProp } from './DispatchProp'
+import { LocationComp } from './LocationComp'
 
 interface ShowLocationCompPropsFromState {
 	weather: IWeather | null
@@ -78,46 +81,85 @@ export const ShowLocationComp = withRouter(
 			})
 			if (!isWeatherLoaded) return <></>
 			return (
-				<div>
+				<div className='page'>
 					{!theLocation && <Redirect to='/' />}
-					<Link to={makeRouteSelectLocation()}>{`<`}</Link>
-					{theLocation && (
-						<>
-							<div>
-								{moment(timestamp)
-									.tz(theLocation.timeZone)
-									.format('HH')}
+					<div className='page__head'>
+						<Link
+							to={makeRouteSelectLocation()}
+							className='button'
+						>{`<`}</Link>
+					</div>
+					<div className='page__body'>
+						<div className='show-layout'>
+							<div className='show-layout__inner'>
+								{theLocation && (
+									<>
+										<div className='clock'>
+											<div className='clock__item'>
+												{moment(timestamp)
+													.tz(theLocation.timeZone)
+													.format('HH')}
+											</div>
+											<div className='clock__item'>
+												{moment(timestamp)
+													.tz(theLocation.timeZone)
+													.format('mm')}
+											</div>
+											<div className='clock__location'>
+												<LocationComp
+													location={theLocation}
+												/>
+											</div>
+										</div>
+										{weather && (
+											<div className='weather'>
+												<div className='weather__icon'>
+													{React.createElement(
+														getIconByCode(
+															weather.icon,
+														),
+													)}
+												</div>
+												<div className='weather__desc'>
+													{weather.description}
+												</div>
+												<div className='weather__temp'>
+													{Math.round(
+														weather.temperatureCelsius,
+													)}{' '}
+													°C
+												</div>
+												<div className='weather__sunrise'>
+													<span className='weather__sunrise__icon'>
+														<WiSunriseIconComp />
+													</span>
+													{moment(
+														weather.sunriseTimestamp,
+													)
+														.tz(
+															theLocation.timeZone,
+														)
+														.format('LT')}
+												</div>
+												<div className='weather__sunset'>
+													<span className='weather__sunset__icon'>
+														<WiSunsetIconComp />
+													</span>
+													{moment(
+														weather.sunsetTimestamp,
+													)
+														.tz(
+															theLocation.timeZone,
+														)
+														.format('LT')}
+												</div>
+											</div>
+										)}
+									</>
+								)}
 							</div>
-							<div>
-								{moment(timestamp)
-									.tz(theLocation.timeZone)
-									.format('mm')}
-							</div>
-							<div>{theLocation.cityName}</div>
-							{weather && (
-								<>
-									{React.createElement(
-										getIconByCode(weather.icon),
-									)}
-									<div>{weather.description}</div>
-									<div>
-										{Math.round(weather.temperatureCelsius)}{' '}
-										°C
-									</div>
-									<div>
-										{moment(weather.sunriseTimestamp)
-											.tz(theLocation.timeZone)
-											.format('LT')}
-									</div>
-									<div>
-										{moment(weather.sunsetTimestamp)
-											.tz(theLocation.timeZone)
-											.format('LT')}
-									</div>
-								</>
-							)}
-						</>
-					)}
+						</div>
+					</div>
 				</div>
 			)
 		},

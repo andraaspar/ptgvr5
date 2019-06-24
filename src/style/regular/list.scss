@@ -1,0 +1,23 @@
+.list {
+	display: flex;
+	flex-direction: column;
+	width: 300px;
+	max-width: 100%;
+}
+
+.list__button {
+	@extend %button;
+	text-align: center;
+}
+
+.list__button--selected {
+	background-color: rgba($BLUE_1, 0.6);
+
+	&:hover {
+		background-color: rgba($BLUE_1, 0.8);
+	}
+
+	&:active {
+		background-color: rgba($BLUE_1, 1);
+	}
+}

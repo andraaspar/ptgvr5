@@ -29,18 +29,30 @@ export const SelectLocationComp = connect(
 		}
 	})
 	return (
-		<div>
-			{locations.map((location, index) => (
-				<Link
-					key={index}
-					to={makeRouteShowLocation({ locationIndex: index + '' })}
-				>
-					<LocationComp location={location} />
-				</Link>
-			))}
-			<Link to={makeRouteAddLocation()}>
-				<div>+</div>
-			</Link>
+		<div className='page'>
+			<div className='page__body'>
+				<div className='select-layout'>
+					<div className='list'>
+						{locations.map((location, index) => (
+							<Link
+								key={index}
+								to={makeRouteShowLocation({
+									locationIndex: index + '',
+								})}
+								className='list__button'
+							>
+								<LocationComp location={location} />
+							</Link>
+						))}
+						<Link
+							to={makeRouteAddLocation()}
+							className='list__button'
+						>
+							+
+						</Link>
+					</div>
+				</div>
+			</div>
 		</div>
 	)
 })
