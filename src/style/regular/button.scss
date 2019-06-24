@@ -1,3 +1,7 @@
 .button {
 	@extend %button;
 }
+
+.button--green {
+	color: greenyellow;
+}

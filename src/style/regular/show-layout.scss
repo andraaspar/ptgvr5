@@ -11,6 +11,16 @@
 .show-layout__inner {
 	display: flex;
 	flex-direction: column;
-	width: 300px;
+	width: $LAYOUT_WIDTH;
 	max-width: 100%;
+
+	@media (min-width: 768px) {
+		flex-direction: row;
+		width: 100%;
+		justify-content: center;
+
+		> :nth-child(2) {
+			order: -1;
+		}
+	}
 }

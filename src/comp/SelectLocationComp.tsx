@@ -46,9 +46,9 @@ export const SelectLocationComp = connect(
 						))}
 						<Link
 							to={makeRouteAddLocation()}
-							className='list__button'
+							className='list__button button button--green'
 						>
-							+
+							<i className='fas fa-plus' />
 						</Link>
 					</div>
 				</div>

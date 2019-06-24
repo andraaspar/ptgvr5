@@ -1,5 +1,7 @@
 .clock {
 	text-align: center;
+	width: $LAYOUT_WIDTH;
+	max-width: 100%;
 }
 .clock__item {
 	color: $BLUE_1;

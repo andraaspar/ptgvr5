@@ -1,23 +1,24 @@
 .list {
 	display: flex;
 	flex-direction: column;
-	width: 300px;
+	width: $LAYOUT_WIDTH;
 	max-width: 100%;
 }
 
 .list__button {
 	@extend %button;
 	text-align: center;
+	color: $BLUE_1;
 }
 
 .list__button--selected {
-	background-color: rgba($BLUE_1, 0.6);
+	background-color: rgba($BLUE_1, 0.2);
 
 	&:hover {
-		background-color: rgba($BLUE_1, 0.8);
+		background-color: rgba($BLUE_1, 0.4);
 	}
 
 	&:active {
-		background-color: rgba($BLUE_1, 1);
+		background-color: rgba($BLUE_1, 0.6);
 	}
 }

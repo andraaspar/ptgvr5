@@ -84,10 +84,9 @@ export const ShowLocationComp = withRouter(
 				<div className='page'>
 					{!theLocation && <Redirect to='/' />}
 					<div className='page__head'>
-						<Link
-							to={makeRouteSelectLocation()}
-							className='button'
-						>{`<`}</Link>
+						<Link to={makeRouteSelectLocation()} className='button'>
+							<i className='fas fa-chevron-left' />
+						</Link>
 					</div>
 					<div className='page__body'>
 						<div className='show-layout'>
@@ -112,48 +111,52 @@ export const ShowLocationComp = withRouter(
 											</div>
 										</div>
 										{weather && (
-											<div className='weather'>
-												<div className='weather__icon'>
-													{React.createElement(
-														getIconByCode(
-															weather.icon,
-														),
-													)}
+											<>
+												<div className='weather'>
+													<div className='weather__icon'>
+														{React.createElement(
+															getIconByCode(
+																weather.icon,
+															),
+														)}
+													</div>
+													<div className='weather__desc'>
+														{weather.description}
+													</div>
 												</div>
-												<div className='weather__desc'>
-													{weather.description}
-												</div>
-												<div className='weather__temp'>
-													{Math.round(
-														weather.temperatureCelsius,
-													)}{' '}
-													°C
-												</div>
-												<div className='weather__sunrise'>
-													<span className='weather__sunrise__icon'>
-														<WiSunriseIconComp />
-													</span>
-													{moment(
-														weather.sunriseTimestamp,
-													)
-														.tz(
-															theLocation.timeZone,
+												<div className='weather'>
+													<div className='weather__temp'>
+														{Math.round(
+															weather.temperatureCelsius,
+														)}{' '}
+														°C
+													</div>
+													<div className='weather__sunrise'>
+														<span className='weather__sunrise__icon'>
+															<WiSunriseIconComp />
+														</span>
+														{moment(
+															weather.sunriseTimestamp,
 														)
-														.format('LT')}
-												</div>
-												<div className='weather__sunset'>
-													<span className='weather__sunset__icon'>
-														<WiSunsetIconComp />
-													</span>
-													{moment(
-														weather.sunsetTimestamp,
-													)
-														.tz(
-															theLocation.timeZone,
+															.tz(
+																theLocation.timeZone,
+															)
+															.format('LT')}
+													</div>
+													<div className='weather__sunset'>
+														<span className='weather__sunset__icon'>
+															<WiSunsetIconComp />
+														</span>
+														{moment(
+															weather.sunsetTimestamp,
 														)
-														.format('LT')}
+															.tz(
+																theLocation.timeZone,
+															)
+															.format('LT')}
+													</div>
 												</div>
-											</div>
+											</>
 										)}
 									</>
 								)}

@@ -1,12 +1,34 @@
 .autocomplete {
 	display: flex;
 	flex-direction: column;
-	width: 300px;
+	width: $LAYOUT_WIDTH;
 	max-width: 100%;
 }
 
-.autocomplete__input {
+.autocomplete__top {
 	margin-bottom: 10px;
+	display: flex;
+	flex-direction: row;
+	border-bottom: 1px solid $BLUE_1;
+
+	&:focus-within {
+		outline: none;
+		background: rgba($BLUE_2, 0.6);
+	}
+}
+
+.autocomplete__top__input {
+	flex-grow: 1;
+	border: 0;
+
+	&:focus {
+		background: transparent;
+	}
+}
+
+.autocomplete__top__icon {
+	font-size: 24px;
+	padding: 10px;
 }
 
 .autocomplete__buttons {

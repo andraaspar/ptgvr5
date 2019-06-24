@@ -36,48 +36,53 @@ export const AddLocationComp = withRouter(
 		return (
 			<div className='page'>
 				<div className='page__head'>
-					<Link
-						to={makeRouteSelectLocation()}
-						className='button'
-					>{`<`}</Link>
+					<Link to={makeRouteSelectLocation()} className='button'>
+						<i className='fas fa-chevron-left' />
+					</Link>
 				</div>
 				<div className='page__body'>
 					<div className='add-layout'>
 						<div className='autocomplete'>
-							<input
-								className='autocomplete__input'
-								value={query}
-								placeholder='Type here'
-								onChange={e => {
-									const value = (e.target as HTMLInputElement)
-										.value
-									setQuery(value)
-									setLoadedLocations([])
-									setSelectedLocations({})
-									loadLocationsByQueryDebounced(
-										value,
-										locations => {
-											const locationsNotSelected: ILocationWithoutTimeZone[] = []
-											for (const location of locations) {
-												if (
-													!locationIdsSet.has(
-														location.id,
-													)
-												) {
-													const newLength = locationsNotSelected.push(
-														location,
-													)
-													if (newLength === 8) break
+							<div className='autocomplete__top'>
+								<input
+									className='autocomplete__top__input'
+									value={query}
+									placeholder='Type here'
+									onChange={e => {
+										const value = (e.target as HTMLInputElement)
+											.value
+										setQuery(value)
+										setLoadedLocations([])
+										setSelectedLocations({})
+										loadLocationsByQueryDebounced(
+											value,
+											locations => {
+												const locationsNotSelected: ILocationWithoutTimeZone[] = []
+												for (const location of locations) {
+													if (
+														!locationIdsSet.has(
+															location.id,
+														)
+													) {
+														const newLength = locationsNotSelected.push(
+															location,
+														)
+														if (newLength === 8)
+															break
+													}
 												}
-											}
-											setLoadedLocations(
-												locationsNotSelected,
-											)
-										},
-										e => console.error(e),
-									)
-								}}
-							/>
+												setLoadedLocations(
+													locationsNotSelected,
+												)
+											},
+											e => console.error(e),
+										)
+									}}
+								/>
+								<div className='autocomplete__top__icon'>
+									<i className='fas fa-chevron-down' />
+								</div>
+							</div>
 							<div className='list autocomplete__list'>
 								{loadedLocations.map((location, index) => (
 									<button
