@@ -2,6 +2,7 @@ import axios from 'axios'
 import { getCountryCode } from '../function/getCountryCode'
 import { getTimeZoneId } from '../function/getTimeZoneId'
 import { url } from '../function/url'
+import { ICapitalResponse } from '../model/ICapitalResponse'
 import { ILocation } from '../model/ILocation'
 import { actionAddLocation } from './actions'
 import { thunkPersistLocations } from './thunkPersistLocations'
@@ -11,11 +12,7 @@ export function thunkLoadDefaultLocation(): ThunkValue {
 	return async (dispatch, getState) => {
 		try {
 			const countryCode = await getCountryCode()
-			const response = await axios.get<{
-				capital: string
-				name: string
-				latlng: [number, number]
-			}>(
+			const response = await axios.get<ICapitalResponse>(
 				url`https://restcountries.eu/rest/v2/alpha/${countryCode}?fields=${'capital;name;latlng'}`,
 			)
 			if (response.status !== 200) {

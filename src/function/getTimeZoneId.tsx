@@ -1,4 +1,5 @@
 import { isString } from 'util'
+import { ILocationWithoutTimeZone } from '../model/ILocationWithoutTimeZone'
 import { getTimeZoneIdFromMoment } from './getTimeZoneIdFromMoment'
 import { loadTimeZone } from './loadTimeZone'
 import { loadWeather } from './loadWeather'
@@ -8,12 +9,7 @@ export function getTimeZoneId({
 	longitude,
 	cityName,
 	countryName,
-}: {
-	latitude: number
-	longitude: number
-	cityName: string
-	countryName: string
-}): Promise<string> {
+}: ILocationWithoutTimeZone): Promise<string> {
 	return new Promise<string>((resolve, reject) => {
 		loadTimeZone(latitude, longitude)
 			.then(response => {

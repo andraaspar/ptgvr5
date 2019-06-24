@@ -11,13 +11,13 @@ import { getMinuteTimestamp } from '../function/getMinuteTimestamp'
 import { ILocation } from '../model/ILocation'
 import { IState } from '../model/IState'
 import { IWeather } from '../model/IWeather'
+import { makeRouteSelectLocation } from '../routing/RouteSelectLocation'
 import {
 	getLocationIndexFromRouteShowLocation,
 	RouteShowLocationParams,
 } from '../routing/RouteShowLocation'
 import {
 	selectLocation,
-	selectLocationIndex,
 	selectTimestamp,
 	selectWeather,
 } from '../selector/selectors'
@@ -27,7 +27,6 @@ interface ShowLocationCompPropsFromState {
 	weather: IWeather | null
 	timestamp: number
 	theLocation: ILocation | null
-	locationIndex: number
 }
 interface ShowLocationCompPropsOwn
 	extends RouteComponentProps<RouteShowLocationParams> {}
@@ -42,7 +41,6 @@ export const ShowLocationComp = withRouter(
 			weather: selectWeather(state),
 			timestamp: selectTimestamp(state),
 			theLocation: selectLocation(state),
-			locationIndex: selectLocationIndex(state),
 		}),
 	)(
 		({
@@ -50,7 +48,6 @@ export const ShowLocationComp = withRouter(
 			weather,
 			timestamp,
 			theLocation,
-			locationIndex,
 			match,
 		}: ShowLocationCompProps) => {
 			const newLocationIndex = getLocationIndexFromRouteShowLocation(
@@ -60,7 +57,7 @@ export const ShowLocationComp = withRouter(
 				NaN,
 			)
 			const isWeatherLoaded =
-				newLocationIndex === locationIndex && weather != null
+				newLocationIndex === lastLocationIndex && weather != null
 			useEffect(() => {
 				if (newLocationIndex !== lastLocationIndex) {
 					setLastLocationIndex(newLocationIndex)
@@ -83,7 +80,7 @@ export const ShowLocationComp = withRouter(
 			return (
 				<div>
 					{!theLocation && <Redirect to='/' />}
-					<Link to='/'>{`<`}</Link>
+					<Link to={makeRouteSelectLocation()}>{`<`}</Link>
 					{theLocation && (
 						<>
 							<div>

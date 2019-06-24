@@ -1,7 +1,5 @@
-export interface ILocation {
-	readonly cityName: string
-	readonly countryName: string
-	readonly latitude: number
-	readonly longitude: number
+import { ILocationWithoutTimeZone } from './ILocationWithoutTimeZone'
+
+export interface ILocation extends ILocationWithoutTimeZone {
 	readonly timeZone: string
 }

@@ -8,6 +8,11 @@ import {
 	withRouter,
 } from 'react-router'
 import { IState } from '../model/IState'
+import { ROUTE_ADD_LOCATION } from '../routing/RouteAddLocation'
+import {
+	makeRouteSelectLocation,
+	ROUTE_SELECT_LOCATION,
+} from '../routing/RouteSelectLocation'
 import { ROUTE_SHOW_LOCATION } from '../routing/RouteShowLocation'
 import { AddLocationComp } from './AddLocationComp'
 import { DispatchProp } from './DispatchProp'
@@ -26,16 +31,20 @@ export const AppComp = withRouter(
 			return (
 				<>
 					<Switch>
-						<Route path='/' exact component={SelectLocationComp} />
 						<Route
-							path='/add-location'
+							path={ROUTE_SELECT_LOCATION}
+							exact
+							component={SelectLocationComp}
+						/>
+						<Route
+							path={ROUTE_ADD_LOCATION}
 							component={AddLocationComp}
 						/>
 						<Route
 							path={ROUTE_SHOW_LOCATION}
 							component={ShowLocationComp}
 						/>
-						<Redirect to='/' />
+						<Redirect to={makeRouteSelectLocation()} />
 					</Switch>
 				</>
 			)

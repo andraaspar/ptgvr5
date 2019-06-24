@@ -7,6 +7,7 @@ import { ThunkValue } from './ThunkValue'
 
 export function thunkLoadWeather(): ThunkValue {
 	return async (dispatch, getState) => {
+		dispatch(actionSetWeather(null))
 		const location = selectLocation(getState())
 		if (!location) return
 		const response = await loadWeather(

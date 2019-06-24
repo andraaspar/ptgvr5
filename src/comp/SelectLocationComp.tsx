@@ -1,9 +1,12 @@
 import * as React from 'react'
 import { useEffect } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { thunkLoadDefaultLocation } from '../action/thunkLoadDefaultLocation'
 import { ILocation } from '../model/ILocation'
 import { IState } from '../model/IState'
+import { makeRouteAddLocation } from '../routing/RouteAddLocation'
+import { makeRouteShowLocation } from '../routing/RouteShowLocation'
 import { selectLocations } from '../selector/selectors'
 import { DispatchProp } from './DispatchProp'
 import { LocationComp } from './LocationComp'
@@ -28,12 +31,16 @@ export const SelectLocationComp = connect(
 	return (
 		<div>
 			{locations.map((location, index) => (
-				<LocationComp
+				<Link
 					key={index}
-					locationId={index + ''}
-					location={location}
-				/>
+					to={makeRouteShowLocation({ locationIndex: index + '' })}
+				>
+					<LocationComp location={location} />
+				</Link>
 			))}
+			<Link to={makeRouteAddLocation()}>
+				<div>+</div>
+			</Link>
 		</div>
 	)
 })

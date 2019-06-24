@@ -1,19 +1,16 @@
 import * as React from 'react'
-import { Link } from 'react-router-dom'
-import { ILocation } from '../model/ILocation'
-import { makeRouteShowLocation } from '../routing/RouteShowLocation'
+import { ILocationWithoutTimeZone } from '../model/ILocationWithoutTimeZone'
 
 export interface LocationCompProps {
-	locationId: string
-	location: ILocation
+	location: ILocationWithoutTimeZone
 }
 
-export function LocationComp({ location, locationId }: LocationCompProps) {
+export function LocationComp({ location }: LocationCompProps) {
 	return (
-		<Link to={makeRouteShowLocation({ locationIndex: locationId })}>
+		<div>
 			<strong>{location.cityName}</strong>
 			<br />
 			<small>{location.countryName}</small>
-		</Link>
+		</div>
 	)
 }
