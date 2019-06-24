@@ -10,7 +10,7 @@ export interface LocationCompProps {
 
 export function LocationComp({ location, locationId }: LocationCompProps) {
 	return (
-		<Link to={makeRouteShowLocation({ locationId })}>
+		<Link to={makeRouteShowLocation({ locationIndex: locationId })}>
 			<strong>{location.cityName}</strong>
 			<br />
 			<small>{location.countryName}</small>

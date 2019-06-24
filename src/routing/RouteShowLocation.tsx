@@ -1,13 +1,20 @@
 import { url } from '../function/url'
 
-export const ROUTE_SHOW_LOCATION = '/location/:locationId'
+export const ROUTE_SHOW_LOCATION = '/location/:locationIndex'
 
 export interface RouteShowLocationParams {
-	locationId: string
+	locationIndex: string
 }
 
 export function makeRouteShowLocation({
-	locationId,
+	locationIndex,
 }: RouteShowLocationParams): string {
-	return url`/location/${locationId}`
+	return url`/location/${locationIndex}`
+}
+
+export function getLocationIndexFromRouteShowLocation(
+	p: RouteShowLocationParams,
+): number {
+	const parsed = parseInt(p.locationIndex || '-1', 10)
+	return isNaN(parsed) ? -1 : parsed
 }

@@ -4,6 +4,7 @@ import { getTimeZoneId } from '../function/getTimeZoneId'
 import { url } from '../function/url'
 import { ILocation } from '../model/ILocation'
 import { actionAddLocation } from './actions'
+import { thunkPersistLocations } from './thunkPersistLocations'
 import { ThunkValue } from './ThunkValue'
 
 export function thunkLoadDefaultLocation(): ThunkValue {
@@ -39,6 +40,7 @@ export function thunkLoadDefaultLocation(): ThunkValue {
 				timeZone,
 			}
 			dispatch(actionAddLocation(location))
+			dispatch(thunkPersistLocations())
 		} catch (e) {
 			console.error(e)
 		}

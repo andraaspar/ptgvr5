@@ -7,4 +7,8 @@ export const selectLocations = (state: IState): ReadonlyArray<ILocation> => stat
 // prettier-ignore
 export const selectLocation = (state: IState): ILocation | null => state.locations[state.locationIndex] || null
 // prettier-ignore
+export const selectLocationIndex = (state: IState): number => state.locationIndex
+// prettier-ignore
 export const selectWeather = (state: IState): IWeather | null => state.weather
+// prettier-ignore
+export const selectTimestamp = (state: IState): number => state.timestamp

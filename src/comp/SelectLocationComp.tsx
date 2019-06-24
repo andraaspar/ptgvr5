@@ -28,7 +28,11 @@ export const SelectLocationComp = connect(
 	return (
 		<div>
 			{locations.map((location, index) => (
-				<LocationComp locationId={index + ''} location={location} />
+				<LocationComp
+					key={index}
+					locationId={index + ''}
+					location={location}
+				/>
 			))}
 		</div>
 	)
