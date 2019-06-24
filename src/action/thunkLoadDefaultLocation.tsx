@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { getCountryCode } from '../function/getCountryCode'
+import { getLocationId } from '../function/getLocationId'
 import { getTimeZoneId } from '../function/getTimeZoneId'
 import { url } from '../function/url'
 import { ICapitalResponse } from '../model/ICapitalResponse'
@@ -30,6 +31,7 @@ export function thunkLoadDefaultLocation(): ThunkValue {
 				countryName,
 			})
 			const location: ILocation = {
+				id: getLocationId(cityName, countryName),
 				cityName,
 				countryName,
 				latitude,

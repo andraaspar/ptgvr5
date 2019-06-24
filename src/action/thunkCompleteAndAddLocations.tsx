@@ -7,22 +7,24 @@ import { actionAddLocation } from './actions'
 import { thunkPersistLocations } from './thunkPersistLocations'
 import { ThunkValue } from './ThunkValue'
 
-export function thunkCompleteAndAddLocation(
-	partialLocation: ILocationWithoutTimeZone,
+export function thunkCompleteAndAddLocations(
+	partialLocations: ReadonlyArray<ILocationWithoutTimeZone>,
 	history: History,
 ): ThunkValue {
 	return async (dispatch, getState) => {
-		try {
-			const timeZone = await getTimeZoneId(partialLocation)
-			const location: ILocation = {
-				...partialLocation,
-				timeZone,
+		for (const partialLocation of partialLocations) {
+			try {
+				const timeZone = await getTimeZoneId(partialLocation)
+				const location: ILocation = {
+					...partialLocation,
+					timeZone,
+				}
+				dispatch(actionAddLocation(location))
+				dispatch(thunkPersistLocations())
+			} catch (e) {
+				console.error(e)
 			}
-			dispatch(actionAddLocation(location))
-			dispatch(thunkPersistLocations())
-			dispatch(() => history.push(makeRouteSelectLocation()))
-		} catch (e) {
-			console.error(e)
 		}
+		dispatch(() => history.push(makeRouteSelectLocation()))
 	}
 }

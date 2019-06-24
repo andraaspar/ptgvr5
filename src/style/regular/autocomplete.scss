@@ -1,0 +1,15 @@
+.autocomplete__list__button {
+	padding: 5px;
+}
+
+.autocomplete__list__button--selected {
+	background-color: rgba($BLUE_1, 0.6);
+
+	&:hover {
+		background-color: rgba($BLUE_1, 0.8);
+	}
+
+	&:active {
+		background-color: rgba($BLUE_1, 1);
+	}
+}

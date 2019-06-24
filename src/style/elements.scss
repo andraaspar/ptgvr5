@@ -11,3 +11,17 @@ svg {
 a {
 	color: $TEAL_1;
 }
+
+button {
+	color: $TEAL_1;
+	border: 0;
+	background: transparent;
+
+	&:hover {
+		background: rgba($BLUE_2, 0.6);
+	}
+
+	&:active {
+		background: rgba($BLUE_2, 1);
+	}
+}

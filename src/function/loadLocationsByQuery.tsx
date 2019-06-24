@@ -3,6 +3,7 @@ import debounce from 'lodash/debounce'
 import { ICapitalResponse } from '../model/ICapitalResponse'
 import { ILocationWithoutTimeZone } from '../model/ILocationWithoutTimeZone'
 import { INPUT_DEBOUNCE_MS } from '../model/statics'
+import { getLocationId } from './getLocationId'
 import { url } from './url'
 import { withInterface } from './withInterface'
 
@@ -22,6 +23,7 @@ export const loadLocationsByQueryDebounced = debounce(
 				}
 				const capitals = response.data.map(r =>
 					withInterface<ILocationWithoutTimeZone>({
+						id: getLocationId(r.capital, r.name),
 						cityName: r.capital,
 						countryName: r.name,
 						latitude: r.latlng[0],
