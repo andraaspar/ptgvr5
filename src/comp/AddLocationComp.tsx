@@ -104,7 +104,13 @@ export const AddLocationComp = withRouter(
 											)
 										}}
 									>
-										<LocationComp location={location} />
+										<LocationComp
+											location={location}
+											mark={query
+												.trim()
+												.replace(/\s+/g, ' ')}
+											markClass='list__button__mark'
+										/>
 									</button>
 								))}
 
